@@ -1,0 +1,20 @@
+.wrapper 
+    nav 
+        .logo 
+            .img-wrapper
+                img(src="/logo.png",style={"width":"30px","height":"30px"})
+            h1
+                span(style={"color":"rgba(246, 36, 36, 0.574)"}) To 
+                span(style={"color":"rgba(0, 0, 255, 0.538)"}) Do 
+                span(style={"color":"rgba(120,120,120,0.835)"}) List
+        ul.nav-list 
+            if user
+                li 
+                    a(href="/user/logout")
+                        button.btn.active(style={"width":"fit-content","padding":"0 1rem"}) 
+                            p logout
+            else
+                li 
+                    a(href="/user/login")
+                        button.btn(style={"width":"fit-content","padding":"0 1rem"}) 
+                            p login

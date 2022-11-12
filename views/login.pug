@@ -1,0 +1,25 @@
+html(lang="en")
+    include head.pug
+    body 
+        main
+            include error.pug
+            
+            
+            .page-wrapper(style={"padding":"8vw 0 0 0"})
+                .tasks-wrapper
+                    .add-task
+                        .title-wrapper 
+                            h1#page-title-2 Login 
+                        form(method="post", action="login",style={"flex-direction":"column","gap":"2rem","align-items":"stretch"})
+                            .form-field-wrapper
+                                label(for="username") email
+                                input#emial(placeholder="Enter your email",required,name="email",style={"width":"50%"})
+                            .form-field-wrapper
+                                label(for="username") password
+                                input#password(placeholder="Enter your password",required,name="password",style={"width":"50%"},type="password")
+                            .form-field-wrapper
+                                button.btn.active(type="submit") submit 
+                                a(href="/user/signup")   
+                                    button.btn(type="button") signup
+                                a(href="/user/forgot")    
+                                    button.btn(type="button") forgot password 

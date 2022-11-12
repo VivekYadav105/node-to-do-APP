@@ -1,0 +1,28 @@
+html(lang="en")
+    include head.pug
+    body 
+        main
+            include error.pug
+
+            .page-wrapper(style={"padding":"8vw 0 0 0"})
+                .tasks-wrapper
+                    .add-task
+                        .title-wrapper
+                            h1#page-title-2 Signup 
+                        form(method="post", action="/user/signup",style={"flex-direction":"column","gap":"2rem","align-items":"stretch"})
+                            .form-field-wrapper
+                                input#fname(placeholder="first name",required,name="fname",style={"width":"40%"})
+                                input#lname(placeholder="last name",required,name="lname",style={"width":"40%"}) 
+                            .form-field-wrapper
+                                label(for="email") email
+                                input#email(placeholder="Enter your email",type="email",required,name="email",style={"width":"50%"})
+                            .form-field-wrapper
+                                label(for="password") password
+                                input#password(placeholder="Enter new password",type="password",required,name="password",style={"width":"50%"})
+                            .form-field-wrapper
+                                label(for="confirm_password") confirm Password
+                                input#confirm_password(placeholder="confirm your password",required,type="password",name="confirmPassword",style={"width":"50%"})
+                            .form-field-wrapper
+                                button.btn.active(type="submit") submit 
+                                a(href="/user/login")   
+                                    button.btn(type="button") login

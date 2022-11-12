@@ -1,0 +1,350 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Space+Mono&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "Anurati Regular";
+  src: url("/static/Anurati-Regular.otf");
+}
+.wrapper{
+  width: 100%;
+}
+main {
+  min-height: 100vh;
+  background-color: rgba(0, 0, 255, 0.538);
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+}
+nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5rem;
+}
+
+nav ul {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 3rem;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo .img-wrapper {
+  border-radius: 50%;
+  box-shadow: 5px 4px 10px 4px rgba(58, 58, 199, 0.577),
+    4px -5px 10px 4px rgba(0, 0, 255, 0.249),
+    -4px 6px 10px 4px rgba(246, 36, 36, 0.574),
+    -4px -4px 10px 4px rgba(194, 59, 59, 0.341);
+}
+
+.logo h1 {
+  font-family: "Space Mono", monospace;
+  display: inline-block;
+  padding: 0 2rem;
+}
+
+nav ul li {
+  padding: 0.5rem;
+  margin: 0 1rem;
+  list-style-type: none;
+}
+
+.page-wrapper {
+  width: 100vw;
+  min-height: 90vh;
+}
+
+#page-title {
+  font-family: "Space Mono", monospace;
+  color: white;
+  padding-top: 5vw;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+#page-title-2{
+ padding: 0;
+  position: relative;
+  color: blueviolet;
+  text-align: center;
+  font-family: "Montserrat";
+  text-transform: uppercase;
+}
+.tasks-wrapper {
+  background-color: white;
+  max-width: 800px;
+  width: 95vw;
+  min-width: 300px;
+  margin: auto;
+  box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.444);
+  padding: 1rem;
+  text-align: center;
+  max-height: 500px;
+  margin-bottom: 1rem;
+}
+
+.add-task {
+  margin: 1rem;
+}
+
+.add-task form {
+  display: flex;
+  width: 100%;
+  padding: 0 3rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.add-task p {
+  font-family: "Space Mono", monospace;
+}
+
+label{
+  font-family:"Space Mono",monospace;
+  padding: .75rem;
+  margin: 0 1.5rem;
+  background-color: rgb(216, 195, 57);
+  box-shadow: -3px -3px 1px 1px rgba(247, 224, 75, 0.589);
+}
+
+input{
+  background-color: transparent;
+  color: blue;
+  border: none;
+  border-bottom: 2px solid blue;
+  padding: 1rem;
+  letter-spacing: 1px;
+  width: 80%;
+  min-width: 300px !important;
+  color: blue;
+  font-family: "Space Mono", monospace;
+}
+
+.tasks {
+  width: 100%;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  max-height: 30vh;
+  overflow: auto;
+}
+
+.task {
+  padding: 1rem;
+  display: flex;
+  width: 80%;
+  background-color: rgba(0, 0, 255, 0.538);
+  margin: auto;
+  color: white;
+  font-family: "Anurati Regular";
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task p {
+  flex: 1;
+}
+
+
+#checkbox {
+  appearance: none;
+  border-radius: 5px;
+  position: relative;
+  background-color: rgba(0, 0, 255, 0.242);
+  border: 2px solid rgba(0, 0, 255, 0.538);
+  width:25px !important;
+  min-width: 25px !important;
+  height: 25px !important;
+}
+#checkbox:checked {
+  appearance: none;
+  padding: 0.5rem;
+  background-color: rgba(189, 208, 68, 0.593);
+  border: 2px solid rgba(212, 238, 41, 0.968);
+  color: green;
+}
+#checkbox:checked::after {
+  position: absolute;
+  content: "\2713";
+  color:rgb(255, 98, 0);
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-weight: bolder;
+  font-family: 'Space Mono',monospace;
+}
+
+#checkbox:checked+.task-name{
+  text-decoration: line-through;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn {
+  width: 45px;
+  min-width: fit-content;
+  padding:0 .5rem ;
+  height: 45px;
+  background-color: rgba(0, 0, 255, 0.538);
+  border: 2px solid transparent;
+  color: white;
+  transition: 0.3s;
+  box-shadow: 5px 5px 0px 2.5px rgba(31, 16, 149, 0.588);
+  font-family: "Space Mono", monospace !important;
+  letter-spacing: 1px;
+}
+a{
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: rgba(0, 0, 255, 0.249);
+  color: rgba(0, 0, 255, 0.538);
+  border: 2px solid rgba(0, 0, 255, 0.549);
+  box-shadow: 2px 2px 0px 1.5px rgba(26, 26, 42, 0.588) !important;
+}
+
+.btn.active {
+  border: 2px solid rgba(216, 62, 62, 0.997);
+  background-color: rgba(246, 36, 36, 0.574);
+  box-shadow: 5px 5px 0px 2.5px rgba(149, 40, 16, 0.588);
+  color: black;
+}
+
+i {
+  transition: 0.5s;
+}
+
+.fa-circle {
+  color: rgb(26, 55, 134);
+  margin-left: 1rem;
+}
+
+.fa-trash:hover {
+  color: rgba(216, 62, 62, 0.997);
+}
+
+.fa-pencil:hover {
+  color: rgb(216, 216, 40);
+}
+
+#status {
+  padding-top: 3px;
+}
+
+.form-field-wrapper{
+  margin: 0 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+}
+
+#status:hover {
+  color: blue;
+}
+
+.error{
+  position: absolute;
+  top:0;
+  left:50%;
+  transform: translate(-50%);
+  display: flex;
+  color: white;
+  padding:.5rem 1rem;
+  top:7.5px;
+  transition: 0.3s;
+  align-items: center;
+  font-family: 'Montserrat';
+  border-radius: 10px;
+  animation: error .3s linear backwards;
+}
+
+.error p{
+  margin: 0 1.5rem;
+}
+
+.error i{
+  font-size: 24px !important;
+}
+
+.error.danger{
+  background-color: rgba(208, 43, 43, 0.482);
+  border: 2px solid brown;
+}
+
+.error.warn{
+  background-color: rgba(231, 228, 63, 0.534);
+  border: 2px solid rgb(87, 87, 6);
+  color: black;
+}
+
+@keyframes error {
+  0%{
+    top:-50px
+  };
+  50%{
+    top: 7.5px
+  };
+  100%{
+    top: -100px;
+  }
+}
+
+@media screen and (max-width:650px) {
+  nav{
+    padding: 1rem 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+ }
+ .form-field-wrapper{
+  justify-content: space-evenly;
+ }
+ .form-field-wrapper input{
+  min-width: 200px !important;
+ }
+ form{
+  padding: 0 !important;
+ }
+ label{
+  margin: 0;
+ }
+  
+}
+
+@media screen and (max-width:400px) {
+  label{
+    display: none;
+  }
+
+  .form-field-wrapper{
+    margin: 0;
+  }
+  .task{
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  .fa-circle{
+    display: none;
+  }
+}

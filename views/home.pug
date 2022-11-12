@@ -1,0 +1,53 @@
+mixin task(user,task)
+    .task
+        i.fa-circle(class=`${task.isCompleted?"fa-solid":"fa-regular"}`)
+        -const taskName = task.name.length<15?task.name:task.name.substring(0,15) + '...'
+        p.task-name(style=`text-decoration:${task.isCompleted?"line-through":''}`)= taskName
+        if user
+            .task-buttons 
+                form(method="post", action=`/task/update/${task._id}`) 
+                    button(style="background-color:transparent;border:none;color:white",type="submit",name="complete" value=`${task.isCompleted?false:true}`)
+                        i.fa-solid.fa-xl#status(class=`${task.isCompleted?"fa-xmark":"fa-check"}`)
+                form(method="get", action=`/task/edit/${task._id}`) 
+                    button(style="background-color:transparent;border:none;color:white",type="submit")
+                        i.fa-solid.fa-pencil.fa-xl
+                form(method="post", action=`/task/delete/${task._id}`)
+                    button(style="background-color:transparent;border:none;color:white")
+                        i.fa-solid.fa-trash(name="delete",type="submit")
+        else 
+            -null
+
+html(lang="en")
+    include head.pug
+    body 
+        main
+            header 
+                include nav.pug
+                include error.pug
+
+            .page-wrapper 
+                .title-wrapper 
+                    h1#page-title To do list
+                .tasks-wrapper
+                    .add-task
+                        form(method="post", action="/task/add")
+                            input#task-input(placeholder="Enter the name of task",name="taskName",required=`${user?true:false}`)
+                            button.btn
+                                i.fa-plus.fa-2xl
+                    .add-task
+                        form
+                            a(style={"width":"30%"},href="/task/view/completed")
+                                button.btn(style="width:100%",name="type",type="button",value="completed",class=`${type=='completed'?'active':''}`)
+                                    p completed
+                            a(style={"width":"30%"},href="/task")
+                                button.btn(style="width:100%",name="type",type="button",value="all",class=`${type=='all'?'active':''}`) 
+                                    p all
+                            a(style={"width":"30%"},href="/task/view/pend")
+                                button.btn(style="width:100%",name="type",type="button",value="pending",class=`${type=='pending'?'active':''}`) 
+                                    p pending
+                
+                        //- p.task(style={"background-color":'rgba(246, 36, 36, 0.574)'}) please login to create yout tasks
+                    .tasks
+                        each task in tasks
+                            +task(user,task)
+

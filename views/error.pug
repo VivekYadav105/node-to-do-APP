@@ -1,0 +1,5 @@
+mixin error(type,msg)
+    .error-wrapper 
+        .error(class=`${type==="warn"?"warn":"danger"}`)
+            i.fa-solid(class=`${type==="warn"?"fa-exclamation":"fa-triangle-exclamation"}`) 
+            p= msg 

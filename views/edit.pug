@@ -1,0 +1,36 @@
+html(lang="en")
+    head
+        include head.pug
+    body 
+        main
+            header
+                include nav.pug
+                include error.pug
+
+            .page-wrapper
+                .title-wrapper 
+                    h1#page-title Edit your task
+                .tasks-wrapper
+                    .edit-task
+                        each task in tasks
+                            form(method="post", action=`/task/edit/${task._id}`)
+                                .input-wrapper
+                                    input#task-input(placeholder="Enter the name of task",name="taskName",required,value=`${task.name}`,style={"width":"80%"})
+                                    button.btn(type="submit")
+                                        i.fa-check.fa-2xl.fa-solid
+                                .tasks
+                                    .task
+                                        input#checkbox(type="checkbox", name="status" checked=`${task.isCompleted}`)
+                                        p.task-name= task.name
+                                    //- -var temp = task.isCompleted
+                                    //- button(style="background-color:transparent;border:none;color:white",type="button",onclick=()=>{temp?true:false})
+                                    //-     -console.log(temp)
+                                    //-     i.fa-square(class=`${temp?"fa-solid":"fa-regular"}`)
+
+                        //- .task-buttons 
+                        //-     form(method="post", action=`/task/update/${task._id}`) 
+                        //-         button(style="background-color:transparent;border:none;color:white",type="submit",name="complete" value=`${task.isCompleted?false:true}`)
+                        //-             i.fa-solid.fa-xl#status(class=`${task.isCompleted?"fa-xmark":"fa-check"}`)
+                        //-     form(method="post", action=`/task/delete/${task._id}`)
+                        //-         button(style="background-color:transparent;border:none;color:white")
+                        //-             i.fa-solid.fa-trash(name="delete",type="submit")
