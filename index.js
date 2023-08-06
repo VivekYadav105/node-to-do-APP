@@ -31,7 +31,7 @@ const start = async () => {
 app.use(express.static(path.join(__dirname,'static')))
 app.use(morgan("tiny"));
 app.use("/task", taskRouter);
-app.use("/user",userRoute);
+app.use("/user",userRouter);
 
 console.log(path.join(__dirname,"static"))
 app.set("views", path.join(__dirname, "views"));
