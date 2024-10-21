@@ -1,5 +1,6 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const mongoose = require("mongoose");
 const morgan = require("morgan");
 const path = require("path");
 const cookieParser = require('cookie-parser');
@@ -12,7 +13,7 @@ const taskRouter = require("./router/taskRoutes");
 const userRouter = require("./router/userRoutes")
 
 
-app.use(express.json)
+app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
 
@@ -35,11 +36,22 @@ app.use("/user",userRouter);
 
 console.log(path.join(__dirname,"static"))
 app.set("views", path.join(__dirname, "views"));
-app.set("view_engine", "pug");
+app.set("view engine", "pug");
 
 app.get("/",(req,res)=>{
   res.redirect('/task')
+  // return res.send("hello world")
 })
 
-//function to start the app
-start();
+mongoose
+.connect(process.env.MONGO_URL,(err)=>{
+  if(err){
+    console.log(err)
+  }else console.log("connected to the database")
+})
+
+
+app.listen(3000, () => {
+  console.log("connected to the port" + 3000);
+});
+
