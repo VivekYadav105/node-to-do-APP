@@ -14,7 +14,7 @@ const signup = async (req, res, next) => {
     const user = await userModel.find({ email: email });
     if (user.length) {
       throw new CustomError(409, "user already exists in the database", {
-        redirect: "/user/login",
+        redirect: "/user/signup",
         status:409
       });
     }
@@ -42,7 +42,7 @@ const login = async (req, res, next) => {
     if (!user) {
       throw new CustomError(404, "user with given mail is not found", {
         user: false,
-        route: "/user/login",
+        redirect: "/user/login",
         status: 404,
       });
     }

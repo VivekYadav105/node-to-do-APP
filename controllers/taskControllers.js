@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const { isValidObjectId } = require("mongoose");
 const devTasks = require("../static/devTasks");
 const jwt = require("jsonwebtoken");
+const { showError } = require("../helper/error");
 
 const getTasks = async (req, res, next) => {
   try {
@@ -12,7 +13,7 @@ const getTasks = async (req, res, next) => {
     var tasks =''
     if(req.cookies.user){ tasks = await TaskModel.find({userid:req.cookies.user.id});}
     else{tasks = devTasks}
-    res.render("home.pug", { tasks: tasks, type: "all",user:req.cookies.user});
+    res.render("home.pug", { tasks: tasks, type: "all",user:req.cookies.user,success:req.flash("success"),message:req.flash("message")});
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: err.message });
@@ -26,16 +27,10 @@ const addTasks = async (req, res, next) => {
     if(!taskName){throw new createError(400,"enter task name")}
     const task = await TaskModel.create({ name: req.body.taskName,userid:req.cookies.user.id });
     res.redirect("/task")
-      .status(200)
-      .json({ task: data, success: true, message: "added successfully" });
   } catch (err) {
-    res.status(500).json({
-      success: false,
-      task: false,
-      message: "adding to db failed",
-      reason: err.message,
-      status:err.status
-    }).redirect("/task")
+    err.message = "adding to db failed"
+    err.
+    showError(err)
   }
 };
 
@@ -57,16 +52,9 @@ const updateTask = async (req, res, next) => {
     );
     if (updatedTask) {
       res.redirect("/task")
-      // .status(200).json({
-      //   message: "task updated succesfully",
-      //   "update task": updatedTask,
-      //   success: true,
-      // });
     }
   } catch (err) {
-    res
-      .status(err.status || 500)
-      .json({ message: err.message, status: err.status || 500 });
+    showError(err)
   }
 };
 
@@ -137,7 +125,7 @@ async function getEditForm(req, res, next) {
     const tasks = await TaskModel.find({ _id: id });
     if (!tasks.length)
       throw new createError(404, `task with id:${id} is not found`);
-    res.render("edit.pug", { tasks: tasks,user:req.cookies.user });
+    res.render("edit.pug", { tasks: tasks,user:req.cookies.user,message:req.flash("message") });
   } catch (err) {
     res
       .status(err.status || 500)
@@ -156,7 +144,7 @@ async function view(req, res, next) {
     console.log(type);
       query = type=="completed"? { isCompleted: true,userid:req.cookies.user.id }:{ userid:req.cookies.user.id,isCompleted: false };
     const tasks = await TaskModel.find(query);
-    res.render("home.pug",{ tasks: tasks, type: type,user:req.cookies.user });
+    res.render("home.pug",{ tasks: tasks, type: type,user:req.cookies.user,message:req.flash("message") });
   } catch (err) {
     res.status(err.status || 500).json({ message: err.message });
   }

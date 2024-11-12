@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const path = require("path");
+const session = require("express-session");
+const flash = require('connect-flash')
 const cookieParser = require('cookie-parser');
 require("dotenv").config();
 const createConnection = require("./connection");
@@ -16,6 +18,13 @@ const userRouter = require("./router/userRoutes")
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
+app.use(flash())
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie:{maxAge:60000}
+}))
 
 
 const start = async () => {

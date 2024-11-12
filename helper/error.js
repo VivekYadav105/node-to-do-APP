@@ -37,20 +37,11 @@ class CustomError extends Error {
 }
 
 const showError = (err, req, res, next) => {
-  if (err.args.redirect) {
-    return res.redirect(err.args.redirect)
-      .status(err.status || 500)
-      .json({
-        success: false,
-        message: err.message || "something went wrong",
-        stack: err.stack,
-      })
+  console.log(err.message);
+  req.flash("message",err.message)
+  if (err.args&&err.args.redirect) {
+    return res.redirect(err.args.redirect);
   }
-  return res.status(err.status || 500).json({
-    success: false,
-    message: err.message || "something went wrong",
-    stack: err.stack,
-  });
 };
 
 module.exports = { CustomError, showError };

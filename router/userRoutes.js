@@ -4,26 +4,30 @@ const bcrypt = require("bcryptjs");
 const userRouter = express.Router();
 const userModel = require("../models/user");
 const jwt = require("jsonwebtoken");
+const flash = require("connect-flash");
 
-const {signup,login,forgotPassword} = require('../controllers/userControllers')
+const {signup,login,forgotPassword} = require('../controllers/userControllers');
+const { showError } = require("../helper/error");
 
 
 userRouter.get("/login", (req, res, next) => {
   try {
-    res.render("login.pug");
+    res.render("login.pug",{message:req.flash("message")});
   } catch (err) {
-    res.status(500).json({ msg: err.message, error: "internal server error" });
+    showError(err,req,res,next)
   }
 });
 
 userRouter.get("/signup", async (req, res, next) => {
-  try{res.render("signup.pug");} 
-  catch (err) {res.status(500).json({ msg: err.message, error: "internal server error" })}
+  try{res.render("signup.pug",{message:req.flash("message")});} 
+  catch (err) {
+    showError(err,req,res,next)
+  }
 });
 
 userRouter.get("/forgot", (req, res, next) => {
-    try { res.render("forgot.pug")}
-    catch (err) {res.status(500).json({ msg: err.message, error: "internal server error" })}
+    try { res.render("forgot.pug",{message:req.flash("message")});}
+    catch (err) {showError(err,req,res,next)}
 });
 
 userRouter.get("/logout", (req, res, next) => {
